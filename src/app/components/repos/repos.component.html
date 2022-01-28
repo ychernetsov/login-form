@@ -1,1 +1,6 @@
-<app-repos-child></app-repos-child>
+Repositories
+<div class="repos-container">
+    <div *ngFor="let repo of (repos$ | async)" class="repos">
+        <app-repos-child [repo]="repo"></app-repos-child>
+    </div>
+</div>

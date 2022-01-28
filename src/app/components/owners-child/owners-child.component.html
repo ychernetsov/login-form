@@ -1,3 +1,7 @@
-<p>
-  owners-child works!
-</p>
+<div class="owners-body">
+  <h3>Owner: {{ owner.login }}</h3>
+  <img [src]="owner.avatar_url">
+  <p> Owners Github Page
+    <a [href]="owner.url">{{ owner.url }}</a>
+  </p>
+</div>

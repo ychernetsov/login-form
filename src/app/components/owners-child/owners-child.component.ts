@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnInit
 } from '@angular/core';
 
@@ -11,7 +12,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OwnersChildComponent implements OnInit {
-
+  @Input() owner;
   constructor() { }
 
   ngOnInit() {

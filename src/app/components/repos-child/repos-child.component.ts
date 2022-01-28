@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnInit
 } from '@angular/core';
+import { Repo } from 'src/app/models/models';
 
 @Component({
   selector: 'app-repos-child',
@@ -11,7 +13,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReposChildComponent implements OnInit {
-
+  @Input() repo: Repo;
   constructor() { }
 
   ngOnInit() {

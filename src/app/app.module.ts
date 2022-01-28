@@ -15,13 +15,27 @@ import { OwnersComponent } from './components/owners/owners.component';
 import { ReposChildComponent } from './components/repos-child/repos-child.component';
 import { OwnersChildComponent } from './components/owners-child/owners-child.component';
 import { someReducer } from './store/reducers/app.reducer';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppEffects } from './store/effects/app.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({someReducer: someReducer}),
-    EffectsModule.forRoot([]),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    StoreModule.forRoot({app: someReducer}),
+    EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

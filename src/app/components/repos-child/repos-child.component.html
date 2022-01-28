@@ -1,4 +1,6 @@
-<p>
-  repos-child works!
-</p>
-<app-child-of-child></app-child-of-child>
+<div class="repo-body">
+  <h3>Owner: {{ repo.owner.login }}</h3>
+  <p> RepoUrl 
+    <a [href]="repo.url">{{ repo.url }}</a></p>
+</div>
+<!-- <app-child-of-child></app-child-of-child> -->

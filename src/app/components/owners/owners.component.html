@@ -1,4 +1,6 @@
-<p>
-  owners works!
-</p>
-<app-owners-child></app-owners-child>
+Repositories
+<div class="owners-container">
+    <div *ngFor="let owner of (owners$ | async)" class="owners">
+        <app-owners-child [owner]="owner"></app-owners-child>
+    </div>
+</div>

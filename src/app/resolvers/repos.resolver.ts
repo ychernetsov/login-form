@@ -8,7 +8,7 @@ import { AppState } from '../store/reducers/app.reducer';
 @Injectable({
   providedIn: 'root',
 })
-export class AppResolver implements Resolve<null>  {
+export class ReposResolver implements Resolve<null>  {
   constructor(private store: Store<AppState>) {}
 
   resolve(

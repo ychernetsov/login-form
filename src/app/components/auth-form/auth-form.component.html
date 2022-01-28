@@ -1,3 +1,34 @@
-<p>
-  auth works!
-</p>
+<form class="form" [formGroup]="authForm">
+  <mat-form-field class="form-control">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" type="text">
+    <!-- <div *ngIf="!authForm.valid && (authForm.dirty || authForm.touched)" class="cross-validation-error-message alert alert-danger">
+      Required field
+    </div> -->
+</mat-form-field>
+  <mat-form-field class="form-control">
+      <mat-label>Your email</mat-label>
+      <input matInput formControlName="email" type="text">
+      <!-- <div *ngIf="!authForm.valid && (authForm.dirty || authForm.touched)" class="cross-validation-error-message alert alert-danger">
+        Required field
+      </div> -->
+  </mat-form-field>
+  <mat-form-field class="form-control">
+      <mat-label>Your password</mat-label>
+      <input matInput [pattern]="'^[0-9]+$'" formControlName="password" type="password">
+  </mat-form-field>
+  <div *ngIf="authForm.get('password').errors?.pattern" class="cross-validation-error-message alert alert-danger">
+    Password should be numeric
+  </div>
+  <mat-form-field class="form-control">
+    <mat-label>Confirm password</mat-label>
+    <input matInput [pattern]="'^[0-9]+$'" formControlName="confirmPassword" type="password">
+  </mat-form-field>
+  <div *ngIf="authForm.get('confirmPassword').errors?.pattern" class="cross-validation-error-message alert alert-danger">
+    Password should be numeric
+  </div>
+  <div class="form-footer">
+      <button mat-button [disabled]="!authForm.valid" (click)="onAuth()">Sign in</button>
+      <a routerLink="/login">Login</a>
+  </div>
+</form>
