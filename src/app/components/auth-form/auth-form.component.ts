@@ -7,15 +7,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/models/models';
+import { ForbiddenNameValidator, hasUniqueNumbers, matchPasswords } from 'src/app/shared/validators';
 import { loginSuccess } from 'src/app/store/actions/app.actions';
-
-export function hasUniqueNumbers(input: AbstractControl): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const inputValues = input.value.split('');
-    const uniqueValues = new Set(inputValues);
-    return inputValues.length === uniqueValues.size ? null : {nonUniqueNumbers: {value: control.value}};
-  };
-}
 
 @Component({
   selector: 'app-auth-form',
@@ -29,10 +22,14 @@ export class AuthFormComponent implements OnInit {
 
   ngOnInit() {
     this.authForm = this.fb.group({
-      name: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.minLength(4), hasUniqueNumbers]),
+      name: new FormControl('', [Validators.required, ForbiddenNameValidator(/admin/)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(4), hasUniqueNumbers()]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    },
+    {
+      validators: matchPasswords(),
+      updateOn: 'change'
     })
   }
 

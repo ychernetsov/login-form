@@ -23,12 +23,17 @@ export const fetchOwnersSuccess = createAction(
     props<{ payload: Owner[] }>()
 );
 
+export const logout = createAction(
+    '[Logout] Logout'
+);
+
 const AppActions = union({
     fetchRepos,
     fetchReposSuccess,
     fetchOwners,
     fetchOwnersSuccess,
-    loginSuccess
+    loginSuccess,
+    logout
 });
 
 export type ActionsUnion = typeof AppActions;

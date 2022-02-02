@@ -2,10 +2,10 @@
   <mat-form-field class="form-control">
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" type="text">
-    <!-- <div *ngIf="!authForm.valid && (authForm.dirty || authForm.touched)" class="cross-validation-error-message alert alert-danger">
-      Required field
-    </div> -->
 </mat-form-field>
+<div *ngIf="authForm.get('name').errors?.forbiddenName" class="cross-validation-error-message alert alert-danger">
+  Prohibitet name value: {{ authForm.get('name').errors?.forbiddenName.value }}
+</div>
   <mat-form-field class="form-control">
       <mat-label>Your email</mat-label>
       <input matInput formControlName="email" type="text">
@@ -20,12 +20,18 @@
   <div *ngIf="authForm.get('password').errors?.pattern" class="cross-validation-error-message alert alert-danger">
     Password should be numeric
   </div>
+  <div *ngIf="authForm.get('password').errors?.nonUniqueNumbers" class="cross-validation-error-message alert alert-danger">
+    Password should contain unique numbers
+  </div>
   <mat-form-field class="form-control">
     <mat-label>Confirm password</mat-label>
     <input matInput [pattern]="'^[0-9]+$'" formControlName="confirmPassword" type="password">
   </mat-form-field>
   <div *ngIf="authForm.get('confirmPassword').errors?.pattern" class="cross-validation-error-message alert alert-danger">
     Password should be numeric
+  </div>
+  <div *ngIf="authForm.errors?.passwordsNotMatch && (authForm.get('confirmPassword').dirty || authForm.get('confirmPassword').touched)" class="cross-validation-error-message alert alert-danger">
+    Passwords do not match
   </div>
   <div class="form-footer">
       <button mat-button [disabled]="!authForm.valid" (click)="onAuth()">Sign in</button>

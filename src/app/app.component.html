@@ -1,6 +1,7 @@
 <nav *ngIf="isLoggedIn$ | async">
     <a routerLink='/repos'>Repos</a>
     <a routerLink='/owners'>Owners</a>
+    <a routerLink='/auth' (click)="onLogout()">Logout</a>
 </nav>
 <h1>{{ title }}!</h1>
 <router-outlet></router-outlet>

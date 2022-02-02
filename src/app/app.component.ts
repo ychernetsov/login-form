@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from './models/models';
-import { loginSuccess } from './store/actions/app.actions';
+import { logout } from './store/actions/app.actions';
 import { isLoggedin } from './store/selectors/selectors';
 
 @Component({
@@ -17,5 +17,9 @@ export class AppComponent {
     this.isLoggedIn$ = this.store.pipe(
       select(isLoggedin)
     )
+  }
+
+  onLogout() {
+    this.store.dispatch(logout())
   }
 }

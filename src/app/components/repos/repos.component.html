@@ -1,6 +1,6 @@
 Repositories
 <div class="repos-container">
-    <div *ngFor="let repo of (repos$ | async)" class="repos">
+    <div *ngFor="let repo of (repos$ | async)" class="repos" routerLink='/repos/{{repo.id}}'>
         <app-repos-child [repo]="repo"></app-repos-child>
     </div>
 </div>

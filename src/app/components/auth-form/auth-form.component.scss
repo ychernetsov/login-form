@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-  }
+
   
   .form {
     width: 20rem;
@@ -18,4 +18,14 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .cross-validation-error-message {
+    color: #a58b8b;
+    border: 1px solid #ff00002b;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #fa807238;
+  }
+
+}
   

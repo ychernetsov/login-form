@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppEffects } from './store/effects/app.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { RepoDetailsComponent } from './components/repos-child/repo-details/repo-details.component';
 
 @NgModule({
   imports: [
@@ -45,9 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     AuthFormComponent,
     ChildOfChildComponent,
-    ReposComponent,
     OwnersComponent,
-    ReposChildComponent,
     OwnersChildComponent
   ],
   providers: [AppService],

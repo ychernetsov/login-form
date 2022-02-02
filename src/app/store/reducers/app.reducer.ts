@@ -20,6 +20,7 @@ const reducer = createReducer(
   on(AppActions.loginSuccess, (state) => ({ ...state, isLoggedin: true })),
   on(AppActions.fetchReposSuccess, (state, { payload }) => ({ ...state, repos: payload })),
   on(AppActions.fetchOwnersSuccess, (state, { payload }) => ({ ...state, owners: payload })),
+  on(AppActions.logout, (state) => ({ ...state, isLoggedin: false }))
 );
 
 export function someReducer(

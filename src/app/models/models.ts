@@ -7,6 +7,7 @@ export interface AppState {
 export interface Repo {
     name: string;
     owner: Owner;
+    id: number;
 }
 
 export interface Owner {
