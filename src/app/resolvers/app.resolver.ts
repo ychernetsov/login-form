@@ -1,20 +1,20 @@
 import { Injectable, InjectionToken, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { ActionCreator, Store } from '@ngrx/store';
+import { ActionCreator, DefaultProjectorFn, MemoizedSelector, select, Store } from '@ngrx/store';
 import { TypedAction } from '@ngrx/store/src/models';
-import { Observable } from 'rxjs';
-import { fetchRepos } from '../store/actions/app.actions';
-import { AppState } from '../store/reducers/app.reducer';
+import { tap } from 'rxjs/operators';
+import { Repo } from '../models/models';
 
-interface ResolveAction {
-  name: () => TypedAction<string>
+interface ResolveAction<T> {
+  name: () => TypedAction<string>,
+  selector: MemoizedSelector<object, T, DefaultProjectorFn<T>>
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppResolver implements Resolve<null>  {
-  static use(action: ResolveAction) {
+  static use<T>(action: ResolveAction<T>) {
     return new InjectionToken(
       'APP_RESOLVER',
       {
@@ -24,12 +24,17 @@ export class AppResolver implements Resolve<null>  {
       }
     )
   }
-  constructor(private store: Store<unknown>, private action: ResolveAction) {}
+  constructor(private store: Store<unknown>, private action: ResolveAction<unknown>) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<any>|Promise<any>|any {
-    return this.store.dispatch(this.action.name());
+  ): any {
+    return this.store.pipe(
+      select(this.action.selector),
+      tap((payload: unknown) => {
+        if (!payload) this.store.dispatch(this.action.name())
+      })
+    )
   }
 }

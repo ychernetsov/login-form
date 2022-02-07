@@ -6,8 +6,10 @@ import { RepoDetailsComponent } from './components/repos-child/repo-details/repo
 import { ReposChildComponent } from './components/repos-child/repos-child.component';
 import { ReposComponent } from './components/repos/repos.component';
 import { AppGuard } from './guards/app.guard';
+import { Owner, Repo } from './models/models';
 import { AppResolver } from './resolvers/app.resolver';
 import { fetchOwners, fetchRepos } from './store/actions/app.actions';
+import { selectOwners, selectRepos } from './store/selectors/selectors';
 
 const routes: Routes = [
   {
@@ -22,7 +24,7 @@ const routes: Routes = [
       import('./components/repos/repos.module').then(m => m.ReposModule),
     // canActivate: [AppGuard],
     resolve: {
-      repos: AppResolver.use({name: fetchRepos})
+      repos: AppResolver.use<Repo[]>({name: fetchRepos, selector: selectRepos})
     },
     pathMatch: 'full',
   },
@@ -36,7 +38,7 @@ const routes: Routes = [
     component: OwnersComponent,
     canActivate: [AppGuard],
     resolve: {
-      owners: AppResolver.use({name: fetchOwners})
+      owners: AppResolver.use<Owner[]>({name: fetchOwners, selector: selectOwners})
     },
     pathMatch: 'full',
   },

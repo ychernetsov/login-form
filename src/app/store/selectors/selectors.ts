@@ -1,12 +1,19 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Repo } from 'src/app/models/models';
-import { AppState } from '../reducers/app.reducer';
+import { AuthState, Owner, OwnersState, Repo, ReposState } from 'src/app/models/models';
 
-export const selectAppState = createFeatureSelector<AppState>('app');
+export const selectAuthState = createFeatureSelector<AppState>('auth');
+export const selectReposState = createFeatureSelector<AppState>('repos');
+export const selectOwnersState = createFeatureSelector<AppState>('owners');
+
+export interface AppState {
+  isLoggedin: boolean;
+  repos: Repo[];
+  owners: Owner[];
+}
 
 export const selectRepos = createSelector(
-    selectAppState,
-  (state: AppState) => { 
+  selectReposState,
+  (state: ReposState) => { 
       return state.repos;
   }
 );
@@ -19,15 +26,15 @@ export const selectRepo = (id: number) => createSelector(
 );
 
 export const selectOwners = createSelector(
-    selectAppState,
-  (state: AppState) => { 
+    selectOwnersState,
+  (state: OwnersState) => { 
       return state.owners;
   }
 );
 
 export const isLoggedin = createSelector(
-    selectAppState,
-  (state: AppState) => { 
+    selectAuthState,
+  (state: AuthState) => { 
       return state.isLoggedin;
   }
 );

@@ -1,7 +1,7 @@
 export interface AppState {
-    isLoggedin: boolean;
-    repos: Repo[];
-    owners: Owner[];
+    auth: AuthState;
+    repos: ReposState;
+    owners: OwnersState;
 }
 
 export interface Repo {
@@ -13,4 +13,16 @@ export interface Repo {
 export interface Owner {
     name: string;
     repo: Repo;
+}
+
+export interface  AuthState {
+    isLoggedin: boolean;
+}
+
+export interface  ReposState {
+    repos: Repo[];
+}
+
+export interface  OwnersState {
+    owners: Owner[];
 }

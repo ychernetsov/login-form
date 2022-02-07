@@ -1,5 +1,11 @@
-import * as fromReducer from './reducers/app.reducer'
+import { ActionReducerMap } from '@ngrx/store'
+import { AppState } from '../models/models'
+import { authReducer } from './reducers/auth.reducer'
+import { ownersReducer } from './reducers/owners.reducer'
+import { reposReducer } from './reducers/repos.reducer'
 
-export interface State {
-  app: fromReducer.AppState;
+export const reducers: ActionReducerMap<AppState> = {
+  auth: authReducer,
+  repos: reposReducer,
+  owners: ownersReducer
 }
